@@ -1,0 +1,14 @@
+services:
+  coordinator:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      DB_PATH: /data/coordinator.db
+    volumes:
+      # SQLite 数据库落在命名卷上, 容器重启/重建后状态保留
+      - coordinator-data:/data
+    restart: unless-stopped
+
+volumes:
+  coordinator-data:
